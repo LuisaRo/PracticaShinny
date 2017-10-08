@@ -1,0 +1,93 @@
+---
+title       : "Practica Shinny"
+subtitle    : Taller 
+author      : Luisa Fernanda Rodriguez Ortiz
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalmone, draft}
+knit        : slidify::knit2slides
+---
+
+## TABLA EN LENGUAJE DE MARCADORES
+
+La siguiente es una tabla realizada de la base de datos *diamonds*. Muestra una distincion entre el precio, de cuantos quilates es la joya, el corte preciso del producto y la claridad del diamante.
+
+```{r, echo = FALSE}
+library(plyr)
+library(ggplot2)
+
+df <- diamonds[seq(1, 5), ]
+df <- with(df, cbind(price, carat, cut, clarity))
+
+# Make the header
+header <- paste(colnames(df), collapse = " | ")
+dashline <- paste(rep(c("---"), length(colnames(df))), collapse = " | ")
+
+# Add the data
+data <- aaply(df, 1, paste, collapse = " | ")
+```
+
+
+|ice | carat | cut | clarity
+| --- | --- | --- | ---
+| 326 | 0.23 | 5 | 2
+| 326 | 0.21 | 4 | 3
+| 327 | 0.23 | 2 | 5
+| 334 | 0.29 | 4 | 4
+| 335 | 0.31 | 2 | 2
+
+---&vcenter
+
+## IMAGEN ESTATICA
+
+![imagen](http://eenube.com/images/sampledata/11870714_453628988148365_2211288040762871414_n.jpg)  
+
+---
+
+## IMAGEN DE GGPLOT2 (CODIGO PARA LA REALIZACION)
+
+```{r, results='hide'}
+# generate pairs of x-y values
+theta = seq(-2 * pi, 2 * pi, length = 300)
+x = cos(theta)
+y = x + sin(theta) 
+# set graphical parameters
+op = par(bg = "black", mar = rep(0.1, 4))
+# plot
+plot(x, y, type = "n", xlim = c(-8, 8), ylim = c(-1.5, 1.5))
+for (i in seq(-2*pi, 2*pi, length = 100))
+{
+  lines(i*x, y, col = hsv(runif(1, 0.85, 0.95), 1, 1, runif(1, 0.2, 0.5)), 
+        lwd = sample(seq(.5, 3, length = 10), 1))          
+}
+# signature
+legend("bottomright", legend = "© Gaston Sanchez", bty = "n", text.col = "gray70")
+```
+
+---&vcenter
+
+### IMAGEN GGPLOT2 DataArt
+
+```{r echo = FALSE}
+# generate pairs of x-y values
+theta = seq(-2 * pi, 2 * pi, length = 300)
+x = cos(theta)
+y = x + sin(theta) 
+ 
+# set graphical parameters
+op = par(bg = "black", mar = rep(0.1, 4))
+ 
+# plot
+plot(x, y, type = "n", xlim = c(-8, 8), ylim = c(-1.5, 1.5))
+for (i in seq(-2*pi, 2*pi, length = 100))
+{
+  lines(i*x, y, col = hsv(runif(1, 0.85, 0.95), 1, 1, runif(1, 0.2, 0.5)), 
+        lwd = sample(seq(.5, 3, length = 10), 1))          
+}
+ 
+# signature
+legend("bottomright", legend = "© Gaston Sanchez", bty = "n", text.col = "gray70")
+```
